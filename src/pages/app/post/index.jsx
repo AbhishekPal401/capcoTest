@@ -1,22 +1,8 @@
+import React from "react";
 import { useGetPostsQuery } from "../../../services/api/post/index.js";
-
-import { useSelector } from "react-redux";
-import { restApi } from "../../../services/api/index.js";
-
-const CacheChecker = () => {
-  const cachedPosts = useSelector(
-    (state) => restApi.endpoints.getPosts.select()(state)?.data
-  );
-
-  console.log("Cached posts:", cachedPosts);
-
-  return null;
-};
 
 const Posts = () => {
   const { data, error, isLoading } = useGetPostsQuery();
-
-  console.log("Posts query called");
 
   if (isLoading) return <p>Loading posts...</p>;
   if (error) return <p>Error loading posts</p>;
@@ -38,7 +24,6 @@ const Posts = () => {
           <p>{post.body}</p>
         </div>
       ))}
-      <CacheChecker />
     </div>
   );
 };
